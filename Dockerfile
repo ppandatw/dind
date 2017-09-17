@@ -1,5 +1,5 @@
-FROM ubuntu:14.04
-MAINTAINER jerome.petazzoni@docker.com
+FROM java:8-jre
+MAINTAINER Palash Das <dpalash@thoughtworks.com>
 
 # Let's start with some basic stuff.
 RUN apt-get update -qq && apt-get install -qqy \
@@ -11,6 +11,12 @@ RUN apt-get update -qq && apt-get install -qqy \
     
 # Install Docker from Docker Inc. repositories.
 RUN curl -sSL https://get.docker.com/ | sh
+
+# Install pip
+RUN apt-get -y install python-pip
+
+# Install docker-compose
+RUN pip install docker-compose
 
 # Install the magic wrapper.
 ADD ./wrapdocker /usr/local/bin/wrapdocker
